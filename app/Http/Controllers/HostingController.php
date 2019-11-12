@@ -162,9 +162,49 @@ class HostingController extends Controller
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
-            $store = Hosting::find($Hosting)->update($request->all());
 
-            if ($store) {
+
+            if($file = $request->file('logo_file')){
+                $destinationPath = 'img/hosting/';
+                $file->move($destinationPath,$file->getClientOriginalName());
+                $request["logo"] = $file->getClientOriginalName();
+            }
+
+
+
+            $update = Hosting::find($Hosting)->update($request->all());
+
+            BenefitsHosting::where('id_hosting', $Hosting)->delete();
+            CustomerSupportHosting::where('id_hosting', $Hosting)->delete();
+            WayToPayHosting::where('id_hosting', $Hosting)->delete();
+
+
+
+            foreach($request["benefits"] as $key => $benefit){
+                $benefits               = New BenefitsHosting;
+                $benefits->id_benefits  = $benefit;
+                $benefits->id_hosting   = $Hosting;
+                $benefits->save();
+
+            }
+
+            foreach($request["customer-support"] as $key => $value){
+                $customerSupport                      = New CustomerSupportHosting;
+                $customerSupport->id_customer_support = $value;
+                $customerSupport->id_hosting          = $Hosting;
+                $customerSupport->save();
+            }
+
+            foreach($request["way-to-pay"] as $key => $value){
+                $wayToPayHosting                = New WayToPayHosting;
+                $wayToPayHosting->id_way_to_pay = $value;
+                $wayToPayHosting->id_hosting    = $Hosting;
+                $wayToPayHosting->save();
+            }
+
+            
+
+            if ($update) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
                 return response()->json($data)->setStatusCode(200);
             }else{

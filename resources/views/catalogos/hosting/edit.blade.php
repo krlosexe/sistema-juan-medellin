@@ -1,6 +1,6 @@
 <div class="card shadow mb-4 hidden" id="cuadro4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Editar Beneficios</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Editar Hosting</h6>
   </div>
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="form-update" enctype="multipart/form-data">
@@ -16,7 +16,7 @@
                 <div class="col-sm-12 text-center">
                         <div class="kv-avatar">
                             <div class="file-loading">
-                                <input id="logo-edit" name="logo_file" type="file" required disabled>
+                                <input id="logo-edit" name="logo_file" type="file">
                             </div>
                         </div>
                         <div class="kv-avatar-hintss">
