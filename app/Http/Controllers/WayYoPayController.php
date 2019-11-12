@@ -16,7 +16,7 @@ class WayYoPayController extends Controller
      */
     public function index(Request $request)
     {
-        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+        //if ($this->VerifyLogin($request["id_user"],$request["token"])){
             $modulos = WayYoPay::select("way_to_pay.*", "auditoria.*", "user_registro.email as email_regis")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "way_to_pay.id_way_to_pay")
                                 ->where("auditoria.tabla", "way_to_pay")
@@ -26,9 +26,9 @@ class WayYoPayController extends Controller
                                 ->get();
            
             return response()->json($modulos)->setStatusCode(200);
-        }else{
-            return response()->json("No esta autorizado")->setStatusCode(400);
-        }
+       // }else{
+          //  return response()->json("No esta autorizado")->setStatusCode(400);
+        //}
     }
 
     /**

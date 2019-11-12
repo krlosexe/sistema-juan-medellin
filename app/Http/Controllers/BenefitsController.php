@@ -16,7 +16,7 @@ class BenefitsController extends Controller
      */
     public function index(Request $request)
     {
-        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+       // if ($this->VerifyLogin($request["id_user"],$request["token"])){
             $modulos = Benefits::select("benefits.*", "auditoria.*", "user_registro.email as email_regis")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "benefits.id_benefits")
                                 ->where("auditoria.tabla", "benefits")
@@ -26,9 +26,9 @@ class BenefitsController extends Controller
                                 ->get();
            
             return response()->json($modulos)->setStatusCode(200);
-        }else{
-            return response()->json("No esta autorizado")->setStatusCode(400);
-        }
+       // }else{
+          //  return response()->json("No esta autorizado")->setStatusCode(400);
+       // }
     }
 
     /**

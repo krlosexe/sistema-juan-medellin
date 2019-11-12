@@ -19,25 +19,65 @@ class HostingController extends Controller
      */
     public function index(Request $request)
     {
-        if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            $result = Hosting::select("hosting.*", "auditoria.*", "user_registro.email as email_regis")
+        //if ($this->VerifyLogin($request["id_user"],$request["token"])){
+
+            if(isset($request["category"])){
+                $where_category = array("hosting.category" => $request["category"]);
+            }else{
+                $where_category = array();
+            }
+
+            $where_benefits = [
+                ["benefits_hosting.id_benefits", 2],
+                ["benefits_hosting.id_benefits", 3]
+            ];
+            
+            $attributes = [3, 2, 1];
+
+          
+            $result = Hosting::select("hosting.*", "category.nombre as name_category", "auditoria.*", "user_registro.email as email_regis")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "hosting.id_hosting")
+                                ->join("category", "category.id_category", "=", "hosting.category")
+
+                                ->join("benefits_hosting", "benefits_hosting.id_hosting", "=", "hosting.id_hosting")
+
+
                                 ->where("auditoria.tabla", "hosting")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
-
+                                 
                                 ->with("benefits")
                                 
                                 ->with("Support")
                                 ->with("WayToPay")
 
                                 ->where("auditoria.status", "!=", "0")
+
+                                ->where($where_category)
+                                
+
+                                ->where(function($query) use ($attributes) 
+                                    {
+
+                                      foreach($attributes as $key => $value){
+                                       // $query->orWhere($key, $value);
+                                         $query->orWhere("benefits_hosting.id_benefits", $value);
+                                      }
+                                
+                                    //   $query->orWhere("benefits_hosting.id_benefits", 3);
+                                    //   $query->orWhere("benefits_hosting.id_benefits", 4);
+                                    //   $query->orWhere("benefits_hosting.id_benefits", 1);
+                                           
+                                    })
+
+                                
                                 ->orderBy("hosting.id_hosting", "DESC")
+                                ->groupBy('hosting.id_hosting')
                                 ->get();
            
             return response()->json($result)->setStatusCode(200);
-        }else{
-            return response()->json("No esta autorizado")->setStatusCode(400);
-        }
+      //  }else{
+           // return response()->json("No esta autorizado")->setStatusCode(400);
+        //}
     }
 
     /**

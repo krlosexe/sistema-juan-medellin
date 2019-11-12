@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('login');
 });
 
+
+
+
+Route::get('/compare', function () {
+    return view('compare');
+});
+
+
 Route::post('auth', 'Login@Auth');
 Route::get('logout/{id}', 'Login@Logout');
 

@@ -783,3 +783,231 @@ function GetCountries(select){
     }
   });
 }
+
+
+
+
+
+
+
+
+function FilterCategory(ul){
+				
+  var url=document.getElementById('ruta').value;
+  $.ajax({
+    url:''+url+'/api/category',
+    type:'GET',
+    dataType:'JSON',
+    async: false,
+    beforeSend: function(){
+    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+    },
+    error: function (data) {
+      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+    },
+    success: function(data){
+      
+      var html = "";
+      $.each(data, function (index, item) { 
+        html += "<li> <input type='radio' class='filter-events categorys' name='category' id='"+item.id_category+"' value='"+item.id_category+"'> <label for='"+item.id_category+"'> "+item.nombre+"</label></li>"
+      });
+
+      $(ul).html(html)
+    }
+  });
+}
+
+
+
+
+function FilterBenefits(ul){
+				
+  var url=document.getElementById('ruta').value;
+  $.ajax({
+    url:''+url+'/api/benefits',
+    type:'GET',
+    dataType:'JSON',
+    async: false,
+    beforeSend: function(){
+    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+    },
+    error: function (data) {
+      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+    },
+    success: function(data){
+      
+      var html = "";
+      $.each(data, function (index, item) { 
+        html += "<li> <input type='checkbox' class='filter-events benefits' name='benefits[]' value='"+item.id_benefits+"' id='check_benefit_"+item.id_benefits+"'> <label for='check_benefit_"+item.id_benefits+"'> "+item.nombre+"</label></li>"
+      });
+
+      $(ul).html(html)
+    }
+  });
+}
+
+
+
+
+function FilterSupport(ul){
+				
+  var url=document.getElementById('ruta').value;
+  $.ajax({
+    url:''+url+'/api/customer-support',
+    type:'GET',
+    dataType:'JSON',
+    async: false,
+    beforeSend: function(){
+    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+    },
+    error: function (data) {
+      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+    },
+    success: function(data){
+      
+      var html = "";
+      $.each(data, function (index, item) { 
+        html += "<li> <input type='checkbox' name='benefits[]' id='check_suppport_"+item.id_customer_support+"'> <label for='check_suppport_"+item.id_customer_support+"'> "+item.nombre+"</label></li>"
+      });
+
+      $(ul).html(html)
+    }
+  });
+}
+
+
+
+
+function FilterWayToPay(ul){
+				
+  var url=document.getElementById('ruta').value;
+  $.ajax({
+    url:''+url+'/api/way-to-pay',
+    type:'GET',
+    dataType:'JSON',
+    async: false,
+    beforeSend: function(){
+    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+    },
+    error: function (data) {
+      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+    },
+    success: function(data){
+      
+      var html = "";
+      $.each(data, function (index, item) { 
+        html += "<li> <input type='checkbox' name='benefits[]' id='check_way-to-pay_"+item.id_way_to_pay+"'> <label for='check_way-to-pay_"+item.id_way_to_pay+"'> "+item.nombre+"</label></li>"
+      });
+
+      $(ul).html(html)
+    }
+  });
+}
+
+
+
+
+
+
+
+function FilterCountries(ul){
+				
+  var url=document.getElementById('ruta').value;
+  $.ajax({
+    url:''+url+'/api/countries',
+    type:'GET',
+    dataType:'JSON',
+    async: false,
+    beforeSend: function(){
+    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+    },
+    error: function (data) {
+      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+    },
+    success: function(data){
+      
+      var html = "";
+      $.each(data, function (index, item) { 
+        html += "<li> <input type='radio' name='benefits[]' id='check_countries"+item.id_countries+"'> <label for='check_countries"+item.id_countries+"'> "+item.nombre+"</label></li>"
+      });
+
+      $(ul).html(html)
+    }
+  });
+}
+
+
+
+
+
+
+
+
+
+function ListHostings() { 
+  var url=document.getElementById('ruta').value;
+
+  var arrayBenefeits = []
+  $(".benefits:checked").each(function (index, element) {
+    arrayBenefeits.push($(element).val())
+  });
+
+  var data = {
+    "category": $(".categorys:checked").val()
+  }
+
+
+  $.ajax({
+    url:''+url+'/api/hosting',
+    type:'GET',
+    dataType:'JSON',
+    data: data,
+    beforeSend: function(){
+      html = ""
+      html += "<div class='text-center'>"
+        html +="<img src='/img/source.gif' class='mx-auto' style='margin-left: 145% !important;'>"
+      html += "</div>"
+
+      $("#list-hosting").html(html)
+    },
+    error: function (data) {
+      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+    },
+    success: function(data){
+
+      var html = "";
+      $.each(data, function (index, item) { 
+
+          console.log(item.benefits)
+          var logo = "/img/hosting/"+item.logo
+
+
+          
+
+
+          html += "<div class='col-md-12 card'>"
+            html +="<div class='row'>"
+              html +="<div class='col-md-4'>"
+                html +='<img src="'+logo+'" alt="..." class="img-thumbnail" width="200px" height="200px">'
+              html +="</div>"
+
+              html +="<div class='col-md-8'>"
+               html +="<h5><b>"+item.name+"</b></h5>"
+               html +="<p>"+item.description+"</p>"
+              html +="</div>"
+            html +="</div>"
+            html += '<div class="card-footer text-muted">Desde: <br><strong>USD '+item.precio+'</strong></div>'
+          html += "</div>"
+          html += "<br>"
+          html += "<br>"
+      });
+
+
+
+      
+
+      $("#list-hosting").html(html)
+    }
+  });
+
+}

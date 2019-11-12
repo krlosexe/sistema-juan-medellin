@@ -73,6 +73,8 @@
 			                    <tr>
 								  <th>Acciones</th>
 								  <th>Nombre</th>
+								  <th>Categoria</th>
+								  <th>Precio</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
 			                    </tr>
@@ -186,6 +188,8 @@
 							}
 						},
 						{"data":"name"},
+						{"data":"name_category"},
+						{"data":"precio"},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
 						
