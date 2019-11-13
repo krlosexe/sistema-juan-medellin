@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2019 a las 08:02:10
--- Versión del servidor: 10.4.8-MariaDB
--- Versión de PHP: 7.3.10
+-- Tiempo de generación: 13-11-2019 a las 21:58:03
+-- Versión del servidor: 10.4.6-MariaDB
+-- Versión de PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `app`
+-- Base de datos: `app_juan`
 --
 
 -- --------------------------------------------------------
@@ -221,7 +221,12 @@ INSERT INTO `auditoria` (`id_auditoria`, `tabla`, `cod_reg`, `status`, `fec_stat
 (174, 'hosting', 3, 1, NULL, 60, '2019-11-11 21:59:58', NULL, NULL),
 (175, 'hosting', 4, 1, NULL, 60, '2019-11-12 00:57:54', NULL, NULL),
 (176, 'hosting', 5, 1, NULL, 60, '2019-11-12 00:59:29', NULL, NULL),
-(177, 'hosting', 6, 1, NULL, 60, '2019-11-12 01:05:40', NULL, NULL);
+(177, 'hosting', 6, 1, NULL, 60, '2019-11-12 01:05:40', NULL, NULL),
+(178, 'hosting', 7, 1, NULL, 60, '2019-11-12 14:48:20', NULL, NULL),
+(179, 'hosting', 8, 1, NULL, 60, '2019-11-12 20:10:37', NULL, NULL),
+(180, 'hosting', 9, 1, NULL, 60, '2019-11-12 21:09:54', NULL, NULL),
+(181, 'hosting', 10, 1, NULL, 60, '2019-11-12 21:11:38', NULL, NULL),
+(182, 'hosting', 11, 1, NULL, 60, '2019-11-12 22:23:30', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -241,7 +246,7 @@ CREATE TABLE `auth_users` (
 --
 
 INSERT INTO `auth_users` (`id`, `id_user`, `token`, `date_auth`) VALUES
-(98, 60, '5707709ce94fc9a4b6ee82630f65c3d75485cb9f2868ad879d072c34ebd4b1b752e62f3ac9da973393604f5e8065904ff26a4c756986b0b2d6cc786223256f00', '2019-11-11 17:56:44');
+(102, 60, '0d06b49206d3ef55ee992274b66978f16cd365e02a447fb481bec99e0c95fb36194b181f7d29872fc62f99d8a11d51e25460df752765d4f0c7a1e6e60e8ea695', '2019-11-13 17:03:20');
 
 -- --------------------------------------------------------
 
@@ -281,12 +286,18 @@ CREATE TABLE `benefits_hosting` (
 --
 
 INSERT INTO `benefits_hosting` (`id_benefits_hosting`, `id_benefits`, `id_hosting`) VALUES
-(4, 3, 3),
-(5, 2, 3),
 (6, 3, 4),
 (7, 2, 4),
 (8, 1, 5),
-(9, 1, 6);
+(48, 3, 3),
+(50, 2, 6),
+(58, 3, 10),
+(59, 2, 10),
+(60, 2, 9),
+(61, 2, 8),
+(62, 1, 8),
+(63, 2, 7),
+(64, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -376,16 +387,24 @@ CREATE TABLE `customer_support_hosting` (
 --
 
 INSERT INTO `customer_support_hosting` (`id_custumer_support_hosting`, `id_customer_support`, `id_hosting`) VALUES
-(5, 4, 3),
-(6, 3, 3),
-(7, 2, 3),
 (8, 3, 4),
 (9, 2, 4),
 (10, 1, 4),
 (11, 3, 5),
-(12, 3, 6),
-(13, 2, 6),
-(14, 1, 6);
+(60, 4, 3),
+(61, 3, 3),
+(62, 1, 3),
+(66, 3, 6),
+(75, 4, 10),
+(76, 3, 10),
+(77, 2, 10),
+(78, 3, 9),
+(79, 4, 8),
+(80, 1, 8),
+(81, 2, 7),
+(82, 1, 7),
+(83, 3, 11),
+(84, 2, 11);
 
 -- --------------------------------------------------------
 
@@ -492,8 +511,13 @@ CREATE TABLE `hosting` (
 --
 
 INSERT INTO `hosting` (`id_hosting`, `name`, `precio`, `description`, `category`, `country`, `logo`) VALUES
-(3, 'VPS', '1000', 'sdgsdgsdgsdg', 6, 4, NULL),
-(6, 'Venus Hewitt', 'Fugit dolor id dol', 'Et quibusdam aut tot', 4, 3, 'Recurso 1.png');
+(3, 'Siteground', '1000', 'Certificados SSL Let’s Encrypt gratis\r\n Migración de sitio web gratuita\r\n Instalador de WordPress y Joomla\r\n Cuentas de correo y bases de datos ilimitadas\r\n Backups diarios automáticos gratis', 6, 4, 'logo-siteground-blanco.png'),
+(6, 'Hostinger', '244', 'Hosting web barato con PHP, MySQL y FTP\r\n Dominios gratis y SSL incluidos\r\n Sencillo creador de sitios web\r\n Instalador automático de aplicaciones\r\n Copias de seguridad semanales o diarias', 5, 2, 'logo-hostinger-blanco.png'),
+(7, 'GoDaddy', '214214', 'Compra con 1 clic de recursos adicionales (CPU, RAM, I/O, etc.)\r\n Protección contra DDoS y monitoreo de seguridad 24/7\r\n Instalación con 1 clic de más de 125 aplicaciones gratis\r\n 1 GB de almacenamiento en base de datos (MySQL Linux)', 2, 3, 'logo-godaddy-blanco.png'),
+(8, 'Hostgator', '5000', 'Creador de Sitios Web Gratis\r\n Cuentas de Correo Ilimitadas\r\n Instalador automático de aplicaciones\r\n Bases de datos MySQL ilimitadas con acceso phpMyAdmin\r\n 4,500 plantillas de sitios web', 7, 4, 'logo-hostgator-blanco.png'),
+(9, 'BlueHost', '12424', 'Bases de datos MySQL ilimitadas\r\n Cuentas de correo electrónico POP3 ilimitadas con SMTP\r\n Instalador de aplicaciones gratuito (WordPress, Joomla, Drupal, etc)', 4, 4, 'logo-bluehost-blanco.png'),
+(10, 'Neolo', '21424', 'Constructor de sitios con WordPress\r\n +200 aplicaciones instalables con 1 clic desde el panel de control\r\n Alta en buscadores gratis (Google, Yahoo! y Bing)\r\n Ilimitadas bases de datos MySQL y cuentas de correo electrónico\r\n Certificado SSL gratuito con cuenta de Cloudflare', 3, 3, 'logo-neolo-blanco.png'),
+(11, 'Barbara Torres', 'Nisi nostrum rerum a', 'Necessitatibus sed v', 4, 1, '9db0b515-3a0e-4a59-bec7-256fe604bcef.jpg');
 
 -- --------------------------------------------------------
 
@@ -704,9 +728,6 @@ CREATE TABLE `way_to_pay_hosting` (
 --
 
 INSERT INTO `way_to_pay_hosting` (`id_way_to_pay_hosting`, `id_way_to_pay`, `id_hosting`) VALUES
-(6, 5, 3),
-(7, 2, 3),
-(8, 1, 3),
 (9, 5, 4),
 (10, 4, 4),
 (11, 3, 4),
@@ -714,9 +735,18 @@ INSERT INTO `way_to_pay_hosting` (`id_way_to_pay_hosting`, `id_way_to_pay`, `id_
 (13, 4, 5),
 (14, 3, 5),
 (15, 1, 5),
-(16, 4, 6),
-(17, 2, 6),
-(18, 1, 6);
+(103, 5, 3),
+(104, 4, 3),
+(105, 3, 3),
+(106, 2, 3),
+(107, 1, 3),
+(111, 4, 6),
+(112, 2, 6),
+(125, 5, 10),
+(126, 2, 9),
+(127, 1, 8),
+(128, 3, 7),
+(129, 3, 11);
 
 --
 -- Índices para tablas volcadas
@@ -876,13 +906,13 @@ ALTER TABLE `way_to_pay_hosting`
 -- AUTO_INCREMENT de la tabla `auditoria`
 --
 ALTER TABLE `auditoria`
-  MODIFY `id_auditoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
+  MODIFY `id_auditoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_users`
 --
 ALTER TABLE `auth_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT de la tabla `benefits`
@@ -894,7 +924,7 @@ ALTER TABLE `benefits`
 -- AUTO_INCREMENT de la tabla `benefits_hosting`
 --
 ALTER TABLE `benefits_hosting`
-  MODIFY `id_benefits_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_benefits_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `category`
@@ -918,7 +948,7 @@ ALTER TABLE `customer_support`
 -- AUTO_INCREMENT de la tabla `customer_support_hosting`
 --
 ALTER TABLE `customer_support_hosting`
-  MODIFY `id_custumer_support_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_custumer_support_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT de la tabla `datos_personales`
@@ -942,7 +972,7 @@ ALTER TABLE `funciones`
 -- AUTO_INCREMENT de la tabla `hosting`
 --
 ALTER TABLE `hosting`
-  MODIFY `id_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -984,7 +1014,7 @@ ALTER TABLE `way_to_pay`
 -- AUTO_INCREMENT de la tabla `way_to_pay_hosting`
 --
 ALTER TABLE `way_to_pay_hosting`
-  MODIFY `id_way_to_pay_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_way_to_pay_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 
 --
 -- Restricciones para tablas volcadas
