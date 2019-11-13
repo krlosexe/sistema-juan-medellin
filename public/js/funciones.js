@@ -867,7 +867,7 @@ function FilterSupport(ul){
       
       var html = "";
       $.each(data, function (index, item) { 
-        html += "<li> <input type='checkbox' name='benefits[]' id='check_suppport_"+item.id_customer_support+"'> <label for='check_suppport_"+item.id_customer_support+"'> "+item.nombre+"</label></li>"
+        html += "<li> <input type='checkbox' name='support[]' class='filter-events support' value='"+item.id_customer_support+"' id='check_suppport_"+item.id_customer_support+"'> <label for='check_suppport_"+item.id_customer_support+"'> "+item.nombre+"</label></li>"
       });
 
       $(ul).html(html)
@@ -896,7 +896,7 @@ function FilterWayToPay(ul){
       
       var html = "";
       $.each(data, function (index, item) { 
-        html += "<li> <input type='checkbox' name='benefits[]' id='check_way-to-pay_"+item.id_way_to_pay+"'> <label for='check_way-to-pay_"+item.id_way_to_pay+"'> "+item.nombre+"</label></li>"
+        html += "<li> <input type='checkbox' class='filter-events way_to_pay' name='way_to_pay[]' value='"+item.id_way_to_pay+"' id='check_way-to-pay_"+item.id_way_to_pay+"'> <label for='check_way-to-pay_"+item.id_way_to_pay+"'> "+item.nombre+"</label></li>"
       });
 
       $(ul).html(html)
@@ -928,7 +928,7 @@ function FilterCountries(ul){
       
       var html = "";
       $.each(data, function (index, item) { 
-        html += "<li> <input type='radio' name='benefits[]' id='check_countries"+item.id_countries+"'> <label for='check_countries"+item.id_countries+"'> "+item.nombre+"</label></li>"
+        html += "<li> <input type='radio' name='benefits[]' class='filter-events countries' value='"+item.id_countries+"' id='check_countries"+item.id_countries+"'> <label for='check_countries"+item.id_countries+"'> "+item.nombre+"</label></li>"
       });
 
       $(ul).html(html)
@@ -952,10 +952,29 @@ function ListHostings() {
     arrayBenefeits.push($(element).val())
   });
 
-  var data = {
-    "category": $(".categorys:checked").val()
-  }
 
+
+  var arraySupport = []
+  $(".support:checked").each(function (index, element) {
+    arraySupport.push($(element).val())
+  });
+
+
+
+  var arrayWayToPay = []
+  $(".way_to_pay:checked").each(function (index, element) {
+    arrayWayToPay.push($(element).val())
+  });
+
+
+
+  var data = {
+    "category"   : $(".categorys:checked").val(),
+    "countries"  : $(".countries:checked").val(),
+    "benefits"   : arrayBenefeits,
+    "support"    : arraySupport,
+    "way_to_pay" : arrayWayToPay
+  }
 
   $.ajax({
     url:''+url+'/api/hosting',
@@ -978,7 +997,6 @@ function ListHostings() {
       var html = "";
       $.each(data, function (index, item) { 
 
-          console.log(item.benefits)
           var logo = "/img/hosting/"+item.logo
 
 

@@ -27,47 +27,56 @@ class HostingController extends Controller
                 $where_category = array();
             }
 
-            $where_benefits = [
-                ["benefits_hosting.id_benefits", 2],
-                ["benefits_hosting.id_benefits", 3]
-            ];
-            
-            $attributes = [3, 2, 1];
+
+            if(isset($request["countries"])){
+                $where_countries = array("hosting.country" => $request["countries"]);
+            }else{
+                $where_countries = array();
+            }
+
+
+
+            isset($request["benefits"])   ?  $benefits   = $request["benefits"]   : $benefits = array();
+            isset($request["support"])    ?  $support    = $request["support"]    : $support    = array();
+            isset($request["way_to_pay"]) ?  $way_to_pay = $request["way_to_pay"] : $way_to_pay    = array();
+           
 
           
             $result = Hosting::select("hosting.*", "category.nombre as name_category", "auditoria.*", "user_registro.email as email_regis")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "hosting.id_hosting")
                                 ->join("category", "category.id_category", "=", "hosting.category")
-
                                 ->join("benefits_hosting", "benefits_hosting.id_hosting", "=", "hosting.id_hosting")
-
+                                ->join("customer_support_hosting", "customer_support_hosting.id_hosting", "=", "hosting.id_hosting")
+                                ->join("way_to_pay_hosting", "way_to_pay_hosting.id_hosting", "=", "hosting.id_hosting")
 
                                 ->where("auditoria.tabla", "hosting")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                                  
                                 ->with("benefits")
-                                
                                 ->with("Support")
                                 ->with("WayToPay")
 
                                 ->where("auditoria.status", "!=", "0")
-
                                 ->where($where_category)
-                                
+                                ->where($where_countries)
 
-                                ->where(function($query) use ($attributes) 
-                                    {
+                                ->where(function($query) use ($benefits){
+                                    foreach($benefits as $key => $value){
+                                        $query->orWhere("benefits_hosting.id_benefits", $value);
+                                    }
+                                })
 
-                                      foreach($attributes as $key => $value){
-                                       // $query->orWhere($key, $value);
-                                         $query->orWhere("benefits_hosting.id_benefits", $value);
-                                      }
-                                
-                                    //   $query->orWhere("benefits_hosting.id_benefits", 3);
-                                    //   $query->orWhere("benefits_hosting.id_benefits", 4);
-                                    //   $query->orWhere("benefits_hosting.id_benefits", 1);
-                                           
-                                    })
+                                ->where(function($query) use ($support){
+                                    foreach($support as $key => $value){
+                                        $query->orWhere("customer_support_hosting.id_customer_support", $value);
+                                    }
+                                })
+
+                                ->where(function($query) use ($way_to_pay){
+                                    foreach($way_to_pay as $key => $value){
+                                        $query->orWhere("way_to_pay_hosting.id_way_to_pay", $value);
+                                    }
+                                })
 
                                 
                                 ->orderBy("hosting.id_hosting", "DESC")

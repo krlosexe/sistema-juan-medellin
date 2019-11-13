@@ -174,8 +174,6 @@
 
             filters()
         });
-        
-
 
         function filters(){
             $(".filter-events").change(function (e) { 
