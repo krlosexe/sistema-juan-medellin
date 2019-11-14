@@ -22,6 +22,44 @@
                         </div>
                     </div>
               </div>
+
+
+
+              <br>
+              <br>
+
+              <div class="row">
+                <div class="col-md-3">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="garantia_view" name="garantia" checked="checked">
+                      <label class="custom-control-label" for="garantia_view">Garantia de 30 Dias</label>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-3">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="ssl_free_view" name="ssl_free" checked="checked">
+                      <label class="custom-control-label" for="ssl_free_view">SSL Gratuito</label>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-3">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="domain_view" name="domain" checked="checked">
+                      <label class="custom-control-label" for="domain_view">Dominio incluido</label>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-3">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="support_spanish_view" name="support_spanish" checked="checked">
+                      <label class="custom-control-label" for="support_spanish_view">Soporte en Español</label>
+                    </div>
+                  </div>
+                </div>
             </div>
 
 
@@ -88,7 +126,8 @@
 				  	</div>
 				</div>
 
-
+        <br>
+              <br>
 
 
         <div class="row">

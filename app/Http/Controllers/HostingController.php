@@ -36,9 +36,9 @@ class HostingController extends Controller
 
 
 
-            isset($request["benefits"])   ?  $benefits   = $request["benefits"]   : $benefits = array();
-            isset($request["support"])    ?  $support    = $request["support"]    : $support    = array();
-            isset($request["way_to_pay"]) ?  $way_to_pay = $request["way_to_pay"] : $way_to_pay    = array();
+            isset($request["benefits"])   ?  $benefits   = $request["benefits"]   : $benefits    = array();
+            isset($request["support"])    ?  $support    = $request["support"]    : $support     = array();
+            isset($request["way_to_pay"]) ?  $way_to_pay = $request["way_to_pay"] : $way_to_pay  = array();
            
 
           
@@ -127,6 +127,10 @@ class HostingController extends Controller
                 return response()->json($validator->errors())->setStatusCode(400);
             }else{
 
+                isset($request["garantia"])        ? $request["garantia"]        = 1 : $request["garantia"]        = 0;
+                isset($request["ssl_free"])        ? $request["ssl_free"]        = 1 : $request["ssl_free"]        = 0;
+                isset($request["domain"])          ? $request["domain"]          = 1 : $request["domain"]          = 0;
+                isset($request["support_spanish"]) ? $request["support_spanish"] = 1 : $request["support_spanish"] = 0;
                 
                 $file = $request->file('logo_file');
 
@@ -221,6 +225,11 @@ class HostingController extends Controller
 
 
 
+            isset($request["garantia"])        ? $request["garantia"]        = 1 : $request["garantia"]        = 0;
+            isset($request["ssl_free"])        ? $request["ssl_free"]        = 1 : $request["ssl_free"]        = 0;
+            isset($request["domain"])          ? $request["domain"]          = 1 : $request["domain"]          = 0;
+            isset($request["support_spanish"]) ? $request["support_spanish"] = 1 : $request["support_spanish"] = 0;
+
             $update = Hosting::find($Hosting)->update($request->all());
 
             BenefitsHosting::where('id_hosting', $Hosting)->delete();
@@ -264,6 +273,32 @@ class HostingController extends Controller
             return response()->json("No esta autorizado")->setStatusCode(400);
         }
     }
+
+
+
+
+    public function status($id, $status, Request $request)
+    {
+        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+            $auditoria =  Auditoria::where("cod_reg", $id)
+                                     ->where("tabla", "hosting")->first();
+
+            $auditoria->status = $status;
+
+            if($status == 0){
+                $auditoria->usr_regmod = $request["id_user"];
+                $auditoria->fec_regmod = date("Y-m-d");
+            }
+            $auditoria->save();
+
+            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("No esta autorizado")->setStatusCode(400);
+        }
+    }
+
+
 
     /**
      * Remove the specified resource from storage.

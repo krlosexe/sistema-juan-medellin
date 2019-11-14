@@ -10,18 +10,54 @@
             <div class="col-md-6">
               <div class="row">
                 <div class="col-sm-12 text-center">
-                        <div class="kv-avatar">
-                            <div class="file-loading">
-                                <input id="logo" name="logo_file" type="file" required>
-                            </div>
-                        </div>
-                        <div class="kv-avatar-hintss">
-                            <small>Seleccione un logo</small>
+                    <div class="kv-avatar">
+                        <div class="file-loading">
+                            <input id="logo" name="logo_file" type="file" required>
                         </div>
                     </div>
+                    <div class="kv-avatar-hintss">
+                        <small>Seleccione un logo</small>
+                    </div>
+                </div>
               </div>
-            </div>
 
+              <br>
+              <br>
+
+              <div class="row">
+                <div class="col-md-3">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="garantia" name="garantia" checked="checked">
+                      <label class="custom-control-label" for="garantia">Garantia de 30 Dias</label>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-3">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="ssl_free" name="ssl_free" checked="checked">
+                      <label class="custom-control-label" for="ssl_free">SSL Gratuito</label>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-3">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="domain" name="domain" checked="checked">
+                      <label class="custom-control-label" for="domain">Dominio incluido</label>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-3">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="support_spanish" name="support_spanish" checked="checked">
+                      <label class="custom-control-label" for="support_spanish">Soporte en Español</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
 
 				  	<div class="col-md-6">
 			          <div class="row">
@@ -95,7 +131,8 @@
 				</div>
 
 
-
+        <br>
+              <br>
 
         <div class="row">
             <div class="col-sm-12 valid-required">

@@ -305,7 +305,32 @@
 
 
 
+					if(data.garantia == 1){
+						$("#garantia_view").prop("checked", true)
+					}else{
+						$("#garantia_view").prop("checked", false)
+					}
 
+
+					if(data.ssl_free == 1){
+						$("#ssl_free_view").prop("checked", true)
+					}else{
+						$("#ssl_free_view").prop("checked", false)
+					}
+
+					if(data.domain == 1){
+						$("#domain_view").prop("checked", true)
+					}else{
+						$("#domain_view").prop("checked", false)
+					}
+
+
+					if(data.support_spanish == 1){
+						$("#support_spanish_view").prop("checked", true)
+					}else{
+						$("#support_spanish_view").prop("checked", false)
+					}
+					
 
 					url_imagen = '/img/hosting/'
 
@@ -403,6 +428,39 @@
 					$("#way-to-pay-edit").val(WaytoPayArray).trigger("change")
 
 					$("#country-edit").val(data.country)
+
+
+
+
+
+					if(data.garantia == 1){
+						$("#garantia_edit").prop("checked", true)
+					}else{
+						$("#garantia_edit").prop("checked", false)
+					}
+
+
+					if(data.ssl_free == 1){
+						$("#ssl_free_edit").prop("checked", true)
+					}else{
+						$("#ssl_free_edit").prop("checked", false)
+					}
+
+					if(data.domain == 1){
+						$("#domain_edit").prop("checked", true)
+					}else{
+						$("#domain_edit").prop("checked", false)
+					}
+
+
+					if(data.support_spanish == 1){
+						$("#support_spanish_edit").prop("checked", true)
+					}else{
+						$("#support_spanish_edit").prop("checked", false)
+					}
+
+
+
 
 
 

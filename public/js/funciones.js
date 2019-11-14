@@ -1000,9 +1000,6 @@ function ListHostings() {
           var logo = "/img/hosting/"+item.logo
 
 
-          
-
-
           html += "<div class='col-md-12 card'>"
             html +="<div class='row'>"
               html +="<div class='col-md-4'>"
@@ -1011,6 +1008,51 @@ function ListHostings() {
 
               html +="<div class='col-md-8'>"
                html +="<h5><b>"+item.name+"</b></h5>"
+
+
+                html += "<ul>"
+
+                  if(item.garantia == 1){
+                    html +='<li class="guarantee">'
+                      html += '<i class="fa fa-shield"></i> Garantia de 30 días'
+                    html += '</li>'
+                  }else{
+                    html +='<li class="guarantee" style="opacity: .4;">'
+                      html += '<i class="fa fa-shield"></i> Sin Garantia'
+                    html += '</li>'
+                  }
+                  
+
+                  if(item.ssl_free == 1){
+                    html +='<li class="guarantee">'
+                      html += '<i class="fa fa-lock"></i> SSL Gratuito'
+                    html += '</li>'
+                  }else{
+                    html +='<li class="guarantee" style="opacity: .4;">'
+                      html += '<i class="fa fa-lock"></i> SSL de pago'
+                    html += '</li>'
+                  }
+
+                  if(item.domain == 1){
+                    html +='<li class="guarantee">'
+                      html += '<i class="fa fa-globe"></i> Dominio incluido'
+                    html += '</li>'
+                  }else{
+                    html +='<li class="guarantee" style="opacity: .4;">'
+                      html += '<i class="fa fa-globe"></i> Dominio de pago'
+                    html += '</li>'
+                  }
+
+                  if(item.support_spanish == 1){
+                    html +='<li class="guarantee">'
+                      html += '<i class="fa fa-life-ring"></i> Soporte en Español'
+                    html += '</li>'
+                  }
+
+                html += "</ul>"
+
+
+
                html +="<p>"+item.description+"</p>"
               html +="</div>"
             html +="</div>"

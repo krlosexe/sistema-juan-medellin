@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2019 a las 21:58:03
+-- Tiempo de generación: 14-11-2019 a las 22:53:54
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -226,7 +226,14 @@ INSERT INTO `auditoria` (`id_auditoria`, `tabla`, `cod_reg`, `status`, `fec_stat
 (179, 'hosting', 8, 1, NULL, 60, '2019-11-12 20:10:37', NULL, NULL),
 (180, 'hosting', 9, 1, NULL, 60, '2019-11-12 21:09:54', NULL, NULL),
 (181, 'hosting', 10, 1, NULL, 60, '2019-11-12 21:11:38', NULL, NULL),
-(182, 'hosting', 11, 1, NULL, 60, '2019-11-12 22:23:30', NULL, NULL);
+(182, 'hosting', 11, 1, NULL, 60, '2019-11-12 22:23:30', NULL, NULL),
+(183, 'countries', 8, 0, NULL, 60, '2019-11-13 21:03:35', 60, '2019-11-13'),
+(184, 'hosting', 12, 1, NULL, 60, '2019-11-14 21:38:07', NULL, NULL),
+(185, 'hosting', 13, 1, NULL, 60, '2019-11-14 21:39:42', NULL, NULL),
+(186, 'hosting', 14, 1, NULL, 60, '2019-11-14 21:42:37', NULL, NULL),
+(187, 'hosting', 15, 1, NULL, 60, '2019-11-14 21:43:16', NULL, NULL),
+(188, 'hosting', 16, 1, NULL, 60, '2019-11-14 21:44:47', NULL, NULL),
+(189, 'hosting', 17, 1, NULL, 60, '2019-11-14 21:45:36', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -246,7 +253,7 @@ CREATE TABLE `auth_users` (
 --
 
 INSERT INTO `auth_users` (`id`, `id_user`, `token`, `date_auth`) VALUES
-(102, 60, '0d06b49206d3ef55ee992274b66978f16cd365e02a447fb481bec99e0c95fb36194b181f7d29872fc62f99d8a11d51e25460df752765d4f0c7a1e6e60e8ea695', '2019-11-13 17:03:20');
+(104, 60, '8de9c7243a9dc87ee5e806a7a90f898d0da36dcabbe0d25e707c84393252555725dac8843e34e51d41b0e1162ab2f31f9b40cbee9e2d59c3d059e1f16af59a5b', '2019-11-14 19:39:34');
 
 -- --------------------------------------------------------
 
@@ -297,7 +304,15 @@ INSERT INTO `benefits_hosting` (`id_benefits_hosting`, `id_benefits`, `id_hostin
 (61, 2, 8),
 (62, 1, 8),
 (63, 2, 7),
-(64, 1, 11);
+(64, 1, 11),
+(65, 2, 12),
+(66, 1, 13),
+(67, 2, 14),
+(68, 1, 14),
+(69, 2, 15),
+(70, 1, 16),
+(71, 2, 17),
+(72, 1, 17);
 
 -- --------------------------------------------------------
 
@@ -346,7 +361,8 @@ INSERT INTO `countries` (`id_countries`, `nombre`) VALUES
 (4, 'Peru'),
 (5, 'Chile'),
 (6, 'Quis anim odio et an'),
-(7, 'Quo quia veniam dol');
+(7, 'Quo quia veniam dol'),
+(8, 'Quae qui aute iusto');
 
 -- --------------------------------------------------------
 
@@ -404,7 +420,18 @@ INSERT INTO `customer_support_hosting` (`id_custumer_support_hosting`, `id_custo
 (81, 2, 7),
 (82, 1, 7),
 (83, 3, 11),
-(84, 2, 11);
+(84, 2, 11),
+(85, 3, 12),
+(86, 2, 12),
+(87, 2, 13),
+(88, 1, 13),
+(89, 3, 14),
+(90, 1, 14),
+(91, 3, 15),
+(92, 3, 16),
+(93, 2, 16),
+(94, 2, 17),
+(95, 1, 17);
 
 -- --------------------------------------------------------
 
@@ -503,21 +530,27 @@ CREATE TABLE `hosting` (
   `description` text NOT NULL,
   `category` int(11) NOT NULL,
   `country` int(11) NOT NULL,
-  `logo` varchar(300) DEFAULT NULL
+  `logo` varchar(300) DEFAULT NULL,
+  `garantia` int(1) NOT NULL,
+  `ssl_free` int(1) NOT NULL,
+  `domain` int(1) NOT NULL,
+  `support_spanish` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `hosting`
 --
 
-INSERT INTO `hosting` (`id_hosting`, `name`, `precio`, `description`, `category`, `country`, `logo`) VALUES
-(3, 'Siteground', '1000', 'Certificados SSL Let’s Encrypt gratis\r\n Migración de sitio web gratuita\r\n Instalador de WordPress y Joomla\r\n Cuentas de correo y bases de datos ilimitadas\r\n Backups diarios automáticos gratis', 6, 4, 'logo-siteground-blanco.png'),
-(6, 'Hostinger', '244', 'Hosting web barato con PHP, MySQL y FTP\r\n Dominios gratis y SSL incluidos\r\n Sencillo creador de sitios web\r\n Instalador automático de aplicaciones\r\n Copias de seguridad semanales o diarias', 5, 2, 'logo-hostinger-blanco.png'),
-(7, 'GoDaddy', '214214', 'Compra con 1 clic de recursos adicionales (CPU, RAM, I/O, etc.)\r\n Protección contra DDoS y monitoreo de seguridad 24/7\r\n Instalación con 1 clic de más de 125 aplicaciones gratis\r\n 1 GB de almacenamiento en base de datos (MySQL Linux)', 2, 3, 'logo-godaddy-blanco.png'),
-(8, 'Hostgator', '5000', 'Creador de Sitios Web Gratis\r\n Cuentas de Correo Ilimitadas\r\n Instalador automático de aplicaciones\r\n Bases de datos MySQL ilimitadas con acceso phpMyAdmin\r\n 4,500 plantillas de sitios web', 7, 4, 'logo-hostgator-blanco.png'),
-(9, 'BlueHost', '12424', 'Bases de datos MySQL ilimitadas\r\n Cuentas de correo electrónico POP3 ilimitadas con SMTP\r\n Instalador de aplicaciones gratuito (WordPress, Joomla, Drupal, etc)', 4, 4, 'logo-bluehost-blanco.png'),
-(10, 'Neolo', '21424', 'Constructor de sitios con WordPress\r\n +200 aplicaciones instalables con 1 clic desde el panel de control\r\n Alta en buscadores gratis (Google, Yahoo! y Bing)\r\n Ilimitadas bases de datos MySQL y cuentas de correo electrónico\r\n Certificado SSL gratuito con cuenta de Cloudflare', 3, 3, 'logo-neolo-blanco.png'),
-(11, 'Barbara Torres', 'Nisi nostrum rerum a', 'Necessitatibus sed v', 4, 1, '9db0b515-3a0e-4a59-bec7-256fe604bcef.jpg');
+INSERT INTO `hosting` (`id_hosting`, `name`, `precio`, `description`, `category`, `country`, `logo`, `garantia`, `ssl_free`, `domain`, `support_spanish`) VALUES
+(3, 'Siteground', '1000', 'Certificados SSL Let’s Encrypt gratis\r\n Migración de sitio web gratuita\r\n Instalador de WordPress y Joomla\r\n Cuentas de correo y bases de datos ilimitadas\r\n Backups diarios automáticos gratis', 6, 4, 'logo-siteground-blanco.png', 1, 1, 1, 1),
+(6, 'Hostinger', '244', 'Hosting web barato con PHP, MySQL y FTP\r\n Dominios gratis y SSL incluidos\r\n Sencillo creador de sitios web\r\n Instalador automático de aplicaciones\r\n Copias de seguridad semanales o diarias', 5, 2, 'logo-hostinger-blanco.png', 1, 1, 1, 1),
+(7, 'GoDaddy', '214214', 'Compra con 1 clic de recursos adicionales (CPU, RAM, I/O, etc.)\r\n Protección contra DDoS y monitoreo de seguridad 24/7\r\n Instalación con 1 clic de más de 125 aplicaciones gratis\r\n 1 GB de almacenamiento en base de datos (MySQL Linux)', 2, 3, 'logo-godaddy-blanco.png', 1, 1, 1, 1),
+(8, 'Hostgator', '5000', 'Creador de Sitios Web Gratis\r\n Cuentas de Correo Ilimitadas\r\n Instalador automático de aplicaciones\r\n Bases de datos MySQL ilimitadas con acceso phpMyAdmin\r\n 4,500 plantillas de sitios web', 7, 4, 'logo-hostgator-blanco.png', 1, 1, 1, 1),
+(9, 'BlueHost', '12424', 'Bases de datos MySQL ilimitadas\r\n Cuentas de correo electrónico POP3 ilimitadas con SMTP\r\n Instalador de aplicaciones gratuito (WordPress, Joomla, Drupal, etc)', 4, 4, 'logo-bluehost-blanco.png', 1, 1, 1, 1),
+(10, 'Neolo', '21424', 'Constructor de sitios con WordPress\r\n +200 aplicaciones instalables con 1 clic desde el panel de control\r\n Alta en buscadores gratis (Google, Yahoo! y Bing)\r\n Ilimitadas bases de datos MySQL y cuentas de correo electrónico\r\n Certificado SSL gratuito con cuenta de Cloudflare', 3, 3, 'logo-neolo-blanco.png', 1, 1, 1, 1),
+(11, 'Barbara Torres', 'Nisi nostrum rerum a', 'Necessitatibus sed v', 4, 1, '9db0b515-3a0e-4a59-bec7-256fe604bcef.jpg', 1, 1, 1, 1),
+(14, 'Kiayada Conner', 'Maxime cum est minim', 'Obcaecati odit dolor', 7, 1, 'default (1).png', 1, 1, 1, 1),
+(17, 'Alyssa Evans', 'Impedit qui digniss', 'Sunt voluptas cum ip', 5, 2, 'default (1).png', 1, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -746,7 +779,20 @@ INSERT INTO `way_to_pay_hosting` (`id_way_to_pay_hosting`, `id_way_to_pay`, `id_
 (126, 2, 9),
 (127, 1, 8),
 (128, 3, 7),
-(129, 3, 11);
+(129, 3, 11),
+(130, 2, 12),
+(131, 3, 13),
+(132, 2, 13),
+(133, 3, 14),
+(134, 2, 14),
+(135, 4, 15),
+(136, 2, 15),
+(137, 1, 15),
+(138, 4, 16),
+(139, 3, 16),
+(140, 2, 16),
+(141, 1, 16),
+(142, 1, 17);
 
 --
 -- Índices para tablas volcadas
@@ -906,13 +952,13 @@ ALTER TABLE `way_to_pay_hosting`
 -- AUTO_INCREMENT de la tabla `auditoria`
 --
 ALTER TABLE `auditoria`
-  MODIFY `id_auditoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `id_auditoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_users`
 --
 ALTER TABLE `auth_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT de la tabla `benefits`
@@ -924,7 +970,7 @@ ALTER TABLE `benefits`
 -- AUTO_INCREMENT de la tabla `benefits_hosting`
 --
 ALTER TABLE `benefits_hosting`
-  MODIFY `id_benefits_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id_benefits_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de la tabla `category`
@@ -936,7 +982,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT de la tabla `countries`
 --
 ALTER TABLE `countries`
-  MODIFY `id_countries` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_countries` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `customer_support`
@@ -948,7 +994,7 @@ ALTER TABLE `customer_support`
 -- AUTO_INCREMENT de la tabla `customer_support_hosting`
 --
 ALTER TABLE `customer_support_hosting`
-  MODIFY `id_custumer_support_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id_custumer_support_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT de la tabla `datos_personales`
@@ -972,7 +1018,7 @@ ALTER TABLE `funciones`
 -- AUTO_INCREMENT de la tabla `hosting`
 --
 ALTER TABLE `hosting`
-  MODIFY `id_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -1014,7 +1060,7 @@ ALTER TABLE `way_to_pay`
 -- AUTO_INCREMENT de la tabla `way_to_pay_hosting`
 --
 ALTER TABLE `way_to_pay_hosting`
-  MODIFY `id_way_to_pay_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id_way_to_pay_hosting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- Restricciones para tablas volcadas
