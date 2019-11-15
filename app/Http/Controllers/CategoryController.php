@@ -14,8 +14,11 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    
     public function index(Request $request)
     {
+        
         //if ($this->VerifyLogin($request["id_user"],$request["token"])){
             $modulos = Category::select("category.*", "auditoria.*", "user_registro.email as email_regis")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "category.id_category")

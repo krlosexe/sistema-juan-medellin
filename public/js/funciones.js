@@ -799,6 +799,12 @@ function FilterCategory(ul){
     type:'GET',
     dataType:'JSON',
     async: false,
+    crossDomain: true,
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+      'Access-Control-Allow-Methods' : 'GET',
+      'Access-Control-Allow-Headers' : 'X-Requested-With, Content-Type, X-Auth-Token, Origin, Authorization'
+  },
     beforeSend: function(){
     // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
     },
@@ -978,13 +984,13 @@ function ListHostings() {
 
   $.ajax({
     url:''+url+'/api/hosting',
-    type:'GET',
+    // type:'GET',
     dataType:'JSON',
     data: data,
     beforeSend: function(){
       html = ""
       html += "<div class='text-center'>"
-        html +="<img src='/img/source.gif' class='mx-auto' style='margin-left: 145% !important;'>"
+        html +="<img src='"+url+"/img/source.gif' class='mx-auto' style='margin-left: 145% !important;'>"
       html += "</div>"
 
       $("#list-hosting").html(html)
