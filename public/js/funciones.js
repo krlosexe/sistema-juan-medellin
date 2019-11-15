@@ -997,7 +997,7 @@ function ListHostings() {
       var html = "";
       $.each(data, function (index, item) { 
 
-          var logo = "/img/hosting/"+item.logo
+          var logo = url+"/img/hosting/"+item.logo
 
 
           html += "<div class='col-md-12 card'>"
