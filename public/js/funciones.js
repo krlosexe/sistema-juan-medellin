@@ -1056,7 +1056,7 @@ function ListHostings() {
                html +="<p>"+item.description+"</p>"
               html +="</div>"
             html +="</div>"
-            html += '<div class="card-footer text-muted">Desde: <br><strong>USD '+item.precio+'</strong></div>'
+            html += '<div class="card-footer text-muted">Desde: <br><strong>USD '+item.precio+'</strong><br><br><a href="'+item.url+'" target="_blank" class="btn btn-warning">Ver ofertas</a></div>'
           html += "</div>"
           html += "<br>"
           html += "<br>"

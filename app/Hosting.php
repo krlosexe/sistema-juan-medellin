@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Hosting extends Model
 {
     protected $fillable = [
-        'name', 'precio', 'description', 'category', 'country', 'logo', 'garantia', 'ssl_free','domain','support_spanish'
+        'name', 'precio', 'description', 'category', 'country', 'logo', 'garantia', 'ssl_free','domain','support_spanish','url'
     ];
 
     protected $table         = 'hosting';

@@ -274,6 +274,7 @@
 					
 					$("#name-view").val(data.name).attr("disabled", "disabled")
 					$("#precio-view").val(data.precio).attr("disabled", "disabled")
+					$("#url-view").val(data.url).attr("disabled", "disabled")
 					$("#description-view").val(data.description).attr("disabled", "disabled")
 
 					$("#category-view").val(data.category).attr("disabled", "disabled")
@@ -400,6 +401,7 @@
 					
 					$("#name-edit").val(data.name)
 					$("#precio-edit").val(data.precio)
+					$("#url-edit").val(data.url)
 					$("#description-edit").val(data.description)
 
 					$("#category-edit").val(data.category)

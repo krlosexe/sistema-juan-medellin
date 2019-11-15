@@ -73,8 +73,19 @@
                   <div class="col-md-6">
                         <label for="">Precio</label>
                         <input style="text-align: right;" type="text" name="precio" class="form-control form-control-user" id="precio-view" placeholder="Precio" required>
-                  </div>                  
+                  </div>   
+
+
+
+                  <div class="col-md-12">
+                        <label for="">URL</label>
+                        <input type="text" name="url" class="form-control form-control-user" id="url-view" placeholder="Url" required>
+                  </div>  
+
+
                 </div>
+
+                
 
 
                 <div class="row">
