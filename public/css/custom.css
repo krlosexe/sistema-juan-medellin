@@ -1,20 +1,3 @@
-body{
-	background-image: url("../img/background-blur-clean-531880-1.jpg") !important;
-}
-
-.bg-login-image{
-	background: #eee;
-	background-image: url("../img/logo.png");
-	background-repeat: no-repeat;
-	background-size: 100%;
-	background-position: 100% 50%;
-}
-
-.dasboard-body{
-	background: #4e73df !important;
-}
-
-
 .hidden{
 	display: none;
 }
@@ -104,99 +87,6 @@ z-index: 99999;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Customize the label (the container-check) */
-.container-check {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Hide the browser's default checkbox */
-.container-check input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #ccc;
-  border: 4px solid #999;
-}
-
-/* On mouse-over, add a grey background color */
-.container-check:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the checkbox is checked, add a blue background */
-.container-check input:checked ~ .checkmark {
-  background-color: #2196F3;
-  border: none;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-.container-check input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the checkmark/indicator */
-.container-check .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-.col-green {
-  color: #4CAF50 !important;
-}
-
-
-.col-red {
-  color: #F44336 !important;
-}
-
 .select2-container .select2-selection--single{
   height: 41px !important;
   padding-top: 6px;
@@ -213,4 +103,18 @@ z-index: 99999;
 
 .select2-container--default .select2-selection--single .select2-selection__arrow{
   top: 8px !important;
+}
+
+
+.collapse > li > a {
+  line-height: 1.5;
+  min-height: auto;
+  padding: 10px 15px;
+  display: block;
+  transition: all 0.15s ease-out;
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  -o-transition: all 0.15s ease-out;
+  -ms-transition: all 0.15s ease-out;
+  color: #888da8;
 }

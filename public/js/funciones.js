@@ -8,9 +8,6 @@ var registrar  = 0;
 
 var name_rol   = 0;
 
-$('.select2').select2({
-  width: '100%'
-});
 
 /* ------------------------------------------------------------------------------- */
     /*
@@ -84,9 +81,9 @@ $('.select2').select2({
                     $('input[type="submit"]').removeAttr('disabled'); //activa el input submit
                     var errores=repuesta.responseText;
                     if(errores!="")
-                        mensajes('danger', errores);
+                        showNoty("error", "topRight",errores)
                     else
-                        mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");        
+                        showNoty("error", "topRight","<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>")
                 },
                  success: function(respuesta){
                     if (respuesta.success == false) {
@@ -317,29 +314,58 @@ $('.select2').select2({
 
       var accede = false;
       var html   = "";
+
+       html += '<li class="nav-item dropdown">'
+          html += '<a class="dropdown-toggle" href="javascript:void(0);">'
+            html += '<span class="icon-holder">'
+              html +=		'<i class="ti-home"></i>'
+            html += '</span>'
+            html += '<span class="title">Inicio</span>'
+           
+          html += '</a>'
+        html += '</li>'
       $.each(modulos_disponibles, function(i, item){
 
-        html += '<li class="nav-item" id="modulo_'+item.nombre+'">';
-          html += ' <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_'+item.nombre+'" aria-expanded="true" aria-controls="collapse_'+item.nombre+'">';
-            html += '<i class="'+item.icon+'"></i>';
-            html += '<span>'+item.nombre+'</span>';
-          html += '</a>'; 
+        html += '<li class="nav-item dropdown">'
+          html += '<a data-toggle="collapse" href="#collapse_'+item.nombre+'" role="button" aria-expanded="false" aria-controls="collapseExample" href="javascript:void(0);">'
+            html += '<span class="icon-holder">'
+              html +=		'<i class="'+item.icon+'"></i>'
+            html += '</span>'
+            html += '<span class="title">'+item.nombre+'</span>'
+            html += '<span class="arrow">'
+              html += '<i class="ti-angle-right"></i>'
+            html += '</span>'
+          html += '</a>'
 
-          html += '<div id="collapse_'+item.nombre+'" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">';
+            html += '<ul class="collapse " id="collapse_'+item.nombre+'">'
 
-            html += '<div class="bg-white py-2 collapse-inner rounded">';
-              html += '<h6 class="collapse-header">'+item.nombre+':</h6>';
               $.each(funciones, function(i2, item2){
                   if(item.id_modulo == item2.id_modulo)
-                    html += '<a class="collapse-item" id="nav_'+item2.route+'" href="'+item2.route+'">'+item2.nombre+'</a>'
+                    html += '<li><a class="collapse-item" id="nav_'+item2.route+'" href="'+item2.route+'">'+item2.nombre+'</a></li>'
 
                   if (uri == item2.route) {
                     accede = true;
                   }
               });
-            html += '</div>';
-          html += '</div>'
-        html += '</li>';
+
+            html += '</ul>'
+        html += '</li>'
+
+          // html += '<div id="collapse_'+item.nombre+'" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">';
+
+          //   html += '<div class="bg-white py-2 collapse-inner rounded">';
+          //     html += '<h6 class="collapse-header">'+item.nombre+':</h6>';
+          //     $.each(funciones, function(i2, item2){
+          //         if(item.id_modulo == item2.id_modulo)
+          //           html += '<a class="collapse-item" id="nav_'+item2.route+'" href="'+item2.route+'">'+item2.nombre+'</a>'
+
+          //         if (uri == item2.route) {
+          //           accede = true;
+          //         }
+          //     });
+          //   html += '</div>';
+          // html += '</div>'
+        
       });
 
       if (!accede && uri != "dashboard") {
@@ -348,6 +374,8 @@ $('.select2').select2({
       }
 
       $("#options").html(html);
+
+   
     }
 
 
@@ -621,459 +649,17 @@ $("#send_usuario").click(function() {
 }
 
 
-
-
-function GetBenefy(select){
-				
-  var url=document.getElementById('ruta').value;
-  $.ajax({
-    url:''+url+'/api/benefits',
-    type:'GET',
-    data: {
-        "id_user": id_user,
-        "token"  : tokens,
-      },
-    dataType:'JSON',
-    async: false,
-    beforeSend: function(){
-    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
-    },
-    error: function (data) {
-      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
-    },
-    success: function(data){
-      $(select+" option").remove();
-      $.each(data, function(i, item){
-        if (item.status == 1) {
-          $(select).append($('<option>',
-          {
-            value: item.id_benefits,
-            text : item.nombre
-          }));
-        }
-      });
-
-    }
-  });
-}
-
-
-
-
-
-function GetSupport(select){
-				
-  var url=document.getElementById('ruta').value;
-  $.ajax({
-    url:''+url+'/api/customer-support',
-    type:'GET',
-    data: {
-        "id_user": id_user,
-        "token"  : tokens,
-      },
-    dataType:'JSON',
-    async: false,
-    beforeSend: function(){
-    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
-    },
-    error: function (data) {
-      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
-    },
-    success: function(data){
-      $(select+" option").remove();
-      $.each(data, function(i, item){
-        if (item.status == 1) {
-          $(select).append($('<option>',
-          {
-            value: item.id_customer_support,
-            text : item.nombre
-          }));
-        }
-      });
-
-    }
-  });
-}
-
-
-
-
-
-
-
-function GetWayToPay(select){
-				
-  var url=document.getElementById('ruta').value;
-  $.ajax({
-    url:''+url+'/api/way-to-pay',
-    type:'GET',
-    data: {
-        "id_user": id_user,
-        "token"  : tokens,
-      },
-    dataType:'JSON',
-    async: false,
-    beforeSend: function(){
-    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
-    },
-    error: function (data) {
-      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
-    },
-    success: function(data){
-      $(select+" option").remove();
-      $.each(data, function(i, item){
-        if (item.status == 1) {
-          $(select).append($('<option>',
-          {
-            value: item.id_way_to_pay,
-            text : item.nombre
-          }));
-        }
-      });
-
-    }
-  });
-}
-
-
-
-
-
-
-
-
-function GetCountries(select){
-				
-  var url=document.getElementById('ruta').value;
-  $.ajax({
-    url:''+url+'/api/countries',
-    type:'GET',
-    data: {
-        "id_user": id_user,
-        "token"  : tokens,
-      },
-    dataType:'JSON',
-    async: false,
-    beforeSend: function(){
-    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
-    },
-    error: function (data) {
-      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
-    },
-    success: function(data){
-      $(select+" option").remove();
-
-      $(select).append($('<option>',
-      {
-        value: "null",
-        text : "Seleccione"
-      }));
-
-
-      $.each(data, function(i, item){
-        if (item.status == 1) {
-          $(select).append($('<option>',
-          {
-            value: item.id_countries,
-            text : item.nombre
-          }));
-        }
-      });
-
-    }
-  });
-}
-
-
-
-
-
-
-
-
-function FilterCategory(ul){
-				
-  var url=document.getElementById('ruta').value;
-  $.ajax({
-    url:''+url+'/api/category',
-    type:'GET',
-    dataType:'JSON',
-    async: false,
-    crossDomain: true,
-    headers: {
-      'X-Requested-With': 'XMLHttpRequest',
-      'Access-Control-Allow-Methods' : 'GET',
-      'Access-Control-Allow-Headers' : 'X-Requested-With, Content-Type, X-Auth-Token, Origin, Authorization'
-  },
-    beforeSend: function(){
-    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
-    },
-    error: function (data) {
-      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
-    },
-    success: function(data){
-      
-      var html = "";
-      $.each(data, function (index, item) { 
-        html += "<li> <input type='radio' class='filter-events categorys' name='category' id='"+item.id_category+"' value='"+item.id_category+"'> <label for='"+item.id_category+"'> "+item.nombre+"</label></li>"
-      });
-
-      $(ul).html(html)
-    }
-  });
-}
-
-
-
-
-function FilterBenefits(ul){
-				
-  var url=document.getElementById('ruta').value;
-  $.ajax({
-    url:''+url+'/api/benefits',
-    type:'GET',
-    dataType:'JSON',
-    async: false,
-    beforeSend: function(){
-    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
-    },
-    error: function (data) {
-      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
-    },
-    success: function(data){
-      
-      var html = "";
-      $.each(data, function (index, item) { 
-        html += "<li> <input type='checkbox' class='filter-events benefits' name='benefits[]' value='"+item.id_benefits+"' id='check_benefit_"+item.id_benefits+"'> <label for='check_benefit_"+item.id_benefits+"'> "+item.nombre+"</label></li>"
-      });
-
-      $(ul).html(html)
-    }
-  });
-}
-
-
-
-
-function FilterSupport(ul){
-				
-  var url=document.getElementById('ruta').value;
-  $.ajax({
-    url:''+url+'/api/customer-support',
-    type:'GET',
-    dataType:'JSON',
-    async: false,
-    beforeSend: function(){
-    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
-    },
-    error: function (data) {
-      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
-    },
-    success: function(data){
-      
-      var html = "";
-      $.each(data, function (index, item) { 
-        html += "<li> <input type='checkbox' name='support[]' class='filter-events support' value='"+item.id_customer_support+"' id='check_suppport_"+item.id_customer_support+"'> <label for='check_suppport_"+item.id_customer_support+"'> "+item.nombre+"</label></li>"
-      });
-
-      $(ul).html(html)
-    }
-  });
-}
-
-
-
-
-function FilterWayToPay(ul){
-				
-  var url=document.getElementById('ruta').value;
-  $.ajax({
-    url:''+url+'/api/way-to-pay',
-    type:'GET',
-    dataType:'JSON',
-    async: false,
-    beforeSend: function(){
-    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
-    },
-    error: function (data) {
-      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
-    },
-    success: function(data){
-      
-      var html = "";
-      $.each(data, function (index, item) { 
-        html += "<li> <input type='checkbox' class='filter-events way_to_pay' name='way_to_pay[]' value='"+item.id_way_to_pay+"' id='check_way-to-pay_"+item.id_way_to_pay+"'> <label for='check_way-to-pay_"+item.id_way_to_pay+"'> "+item.nombre+"</label></li>"
-      });
-
-      $(ul).html(html)
-    }
-  });
-}
-
-
-
-
-
-
-
-function FilterCountries(ul){
-				
-  var url=document.getElementById('ruta').value;
-  $.ajax({
-    url:''+url+'/api/countries',
-    type:'GET',
-    dataType:'JSON',
-    async: false,
-    beforeSend: function(){
-    // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
-    },
-    error: function (data) {
-      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
-    },
-    success: function(data){
-      
-      var html = "";
-      $.each(data, function (index, item) { 
-        html += "<li> <input type='radio' name='benefits[]' class='filter-events countries' value='"+item.id_countries+"' id='check_countries"+item.id_countries+"'> <label for='check_countries"+item.id_countries+"'> "+item.nombre+"</label></li>"
-      });
-
-      $(ul).html(html)
-    }
-  });
-}
-
-
-
-
-
-
-
-
-
-function ListHostings() { 
-  var url=document.getElementById('ruta').value;
-
-  var arrayBenefeits = []
-  $(".benefits:checked").each(function (index, element) {
-    arrayBenefeits.push($(element).val())
-  });
-
-
-
-  var arraySupport = []
-  $(".support:checked").each(function (index, element) {
-    arraySupport.push($(element).val())
-  });
-
-
-
-  var arrayWayToPay = []
-  $(".way_to_pay:checked").each(function (index, element) {
-    arrayWayToPay.push($(element).val())
-  });
-
-
-
-  var data = {
-    "category"   : $(".categorys:checked").val(),
-    "countries"  : $(".countries:checked").val(),
-    "benefits"   : arrayBenefeits,
-    "support"    : arraySupport,
-    "way_to_pay" : arrayWayToPay
-  }
-
-  $.ajax({
-    url:''+url+'/api/hosting',
-    // type:'GET',
-    dataType:'JSON',
-    data: data,
-    beforeSend: function(){
-      html = ""
-      html += "<div class='text-center'>"
-        html +="<img src='"+url+"/img/source.gif' class='mx-auto' style='margin-left: 145% !important;'>"
-      html += "</div>"
-
-      $("#list-hosting").html(html)
-    },
-    error: function (data) {
-      //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
-    },
-    success: function(data){
-
-      var html = "";
-      $.each(data, function (index, item) { 
-
-          var logo = url+"/img/hosting/"+item.logo
-
-
-          html += "<div class='col-md-12 card'>"
-            html +="<div class='row'>"
-              html +="<div class='col-md-4'>"
-                html +='<img src="'+logo+'" alt="..." class="img-thumbnail" width="200px" height="200px">'
-              html +="</div>"
-
-              html +="<div class='col-md-8'>"
-               html +="<h5><b>"+item.name+"</b></h5>"
-
-
-                html += "<ul>"
-
-                  if(item.garantia == 1){
-                    html +='<li class="guarantee">'
-                      html += '<i class="fa fa-shield"></i> Garantia de 30 días'
-                    html += '</li>'
-                  }else{
-                    html +='<li class="guarantee" style="opacity: .4;">'
-                      html += '<i class="fa fa-shield"></i> Sin Garantia'
-                    html += '</li>'
-                  }
-                  
-
-                  if(item.ssl_free == 1){
-                    html +='<li class="guarantee">'
-                      html += '<i class="fa fa-lock"></i> SSL Gratuito'
-                    html += '</li>'
-                  }else{
-                    html +='<li class="guarantee" style="opacity: .4;">'
-                      html += '<i class="fa fa-lock"></i> SSL de pago'
-                    html += '</li>'
-                  }
-
-                  if(item.domain == 1){
-                    html +='<li class="guarantee">'
-                      html += '<i class="fa fa-globe"></i> Dominio incluido'
-                    html += '</li>'
-                  }else{
-                    html +='<li class="guarantee" style="opacity: .4;">'
-                      html += '<i class="fa fa-globe"></i> Dominio de pago'
-                    html += '</li>'
-                  }
-
-                  if(item.support_spanish == 1){
-                    html +='<li class="guarantee">'
-                      html += '<i class="fa fa-life-ring"></i> Soporte en Español'
-                    html += '</li>'
-                  }
-
-                html += "</ul>"
-
-
-
-               html +="<p>"+item.description+"</p>"
-              html +="</div>"
-            html +="</div>"
-            html += '<div class="card-footer text-muted">Desde: <br><strong>USD '+item.precio+'</strong><br><br><a href="'+item.url+'" target="_blank" class="btn btn-warning">Ver ofertas</a></div>'
-          html += "</div>"
-          html += "<br>"
-          html += "<br>"
-      });
-
-
-
-      
-
-      $("#list-hosting").html(html)
-    }
-  });
-
+function showNoty(type, position, msg){
+    noty({
+      theme: 'app-noty',
+      text: msg,
+      type: type,
+      timeout: 3000,
+      layout: position,
+      closeWith: ['button', 'click'],
+      animation: {
+        open: 'noty-animation fadeIn',
+        close: 'noty-animation fadeOut'
+      }
+    });
 }
